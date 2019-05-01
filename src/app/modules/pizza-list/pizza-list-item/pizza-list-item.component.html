@@ -1,0 +1,20 @@
+<article>
+
+  <header>
+    <h3>{{ pizza.ru?.name }}</h3>
+  </header>
+
+  <figure>
+    <img [src]="pizza.img" alt="" />
+
+    <figcaption>
+      {{ pizza.ru?.desc }}
+    </figcaption>
+  </figure>
+
+  <footer>
+    <p>{{ pizza.price }} грн</p>
+    <p>{{ pizza.weight }} грамм</p>
+  </footer>
+
+</article>
