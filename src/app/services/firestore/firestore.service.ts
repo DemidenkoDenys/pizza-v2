@@ -6,41 +6,41 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class FirestoreService {
 
-  pizzas;
-  ingredients;
   ingredientPrices;
 
   constructor(public db: AngularFirestore) {}
 
   getCollectionOnce(name: string) {
-    return this.db.collection(name).ref.get();
+    if (!(name in this)) this[name] = this.db.collection(name).ref.get();
+    return this[name];
   }
 
-  async getPizzasCollection() {
-    return this.pizzas || this.getCollectionOnce('pizza');
-  }
-
-  async getPizzas() {
-    const pizzaSnapshot = await this.getPizzasCollection();
-    return pizzaSnapshot.docs.map(docSnapshot => docSnapshot.data());
-  }
-
-  async getIngredientsCollection() {
-    return this.ingredients || this.getCollectionOnce('ingredients');
+  async getPizzas(sorting) {
+    const pizzaSnapshot = await this.getCollectionOnce('pizza');
+    return pizzaSnapshot.docs
+      .map(docSnapshot => docSnapshot.data())
+      .sort(item => sorting(item));
   }
 
   async getIngredientPrices() {
     if (this.ingredientPrices) return this.ingredientPrices;
 
-    const ingredientPrices = {};
-    const ingredientsSnapshot = await this.getIngredientsCollection();
-
-    ingredientsSnapshot.docs.map(docSnapshot => {
-      const { id, price } = docSnapshot.data();
-      ingredientPrices[id] = price;
-    });
-
-    return ingredientPrices;
+    const ingredientsSnapshot = await this.getCollectionOnce('ingredients');
+    return this.createObjectMap(ingredientsSnapshot, 'id', 'price');
   }
 
+  async getSizes() {
+    const sizeSnapshot = await this.getCollectionOnce('sizes');
+    return this.createObjectMap(sizeSnapshot);
+  }
+
+  createObjectMap = (snapshotsArray, f1 = null, f2 = null) =>
+    snapshotsArray.docs.reduce((acc, item) => {
+      const data = item.data();
+      const key = Object.keys(data)[0];
+      const id = f1 ? data[f1] : key;
+      const value = f1 ? data[f2] : data[id];
+      acc[id] = value;
+      return acc;
+    }, {});
 }

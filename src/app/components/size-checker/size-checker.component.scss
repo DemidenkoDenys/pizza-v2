@@ -1,0 +1,87 @@
+$radius: 30px;
+$indent: 5px;
+$font-size: 0.75rem;
+$bg-color: rgba(230, 28, 38, 0.8);
+$hover-color: rgba(90, 45, 45, 1);
+
+.size-checker{
+    position: relative;
+    top: 100%;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: $bg-color;
+    overflow: hidden;
+    transition: .5s;
+
+    &-item{
+        position: absolute;
+        top: $indent;
+        left: $indent;
+        width: $radius;
+        height: $radius;
+        color: white;
+        font-size: $font-size;
+        line-height: 35px;
+        font-weight: bold;
+        text-align: center;
+        overflow: hidden;
+        border-radius: 0 0 0 0;
+        -webkit-overflow: hidden !important;
+
+        input{
+            display: none;
+
+            &:checked + label{
+                background: $hover-color;
+            }
+            
+            &:not(:checked) + label:hover{
+                color: $hover-color;
+            }
+        }
+
+        label{
+            display: inline-block;
+            width: $radius;
+            height: $radius;
+            border-radius: inherit;
+            text-transform: uppercase;
+            text-indent: $indent;
+            cursor: pointer;
+        }
+        
+        &:nth-child(3),
+        &:last-child{
+            top: auto;
+            bottom: $indent;
+            line-height: 25px;
+        }
+        
+        &:nth-child(2),
+        &:nth-child(3){
+            left: auto;
+            right: $indent;
+
+            label{
+                text-indent: -$indent;
+            }
+        }
+        
+        &:first-child{
+            border-top-left-radius: $radius;
+        }
+
+        &:nth-child(2){
+            border-top-right-radius: $radius;
+        }
+        
+        &:nth-child(3){
+            border-bottom-right-radius: $radius;
+        }
+
+        &:last-child{
+            border-bottom-left-radius: $radius;
+        }
+    }
+}

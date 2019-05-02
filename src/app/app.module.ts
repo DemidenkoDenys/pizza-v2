@@ -14,7 +14,7 @@ import { PizzaListModule } from './modules/pizza-list/pizza-list.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

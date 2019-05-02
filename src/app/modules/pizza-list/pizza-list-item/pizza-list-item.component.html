@@ -1,20 +1,21 @@
-<article>
+<article class="pizza-item">
 
-  <header>
+  <header class="pizza-item-header">
     <h3>{{ pizza.ru?.name }}</h3>
   </header>
 
-  <figure>
-    <img [src]="pizza.img" alt="" />
+  <div class="pizza-item-hover-cover"></div>
 
-    <figcaption>
-      {{ pizza.ru?.desc }}
+  <figure class="pizza-item-content">
+    <img  class="pizza-item-content-image" [src]="pizza.img" alt="" />
+    <figcaption class="pizza-item-content-description">
+      <p><strong>{{ pizza.ru?.desc }}</strong></p>
     </figcaption>
   </figure>
 
-  <footer>
-    <p>{{ pizza.price }} грн</p>
-    <p>{{ pizza.weight }} грамм</p>
+  <footer class="pizza-item-footer">
+    <size-checker [pizzaId]="pizza.id" (onSizeChecked)="onSizeChecked($event)"></size-checker>
+    <price-weight [price]="pizza.price" [weight]="pizza.weight" (onOrder)="onOrder()"></price-weight>
   </footer>
 
 </article>

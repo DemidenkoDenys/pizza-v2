@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { PizzaService } from '../../../services/pizza/pizza.service';
 
 @Component({
   selector: 'pizza-list-item',
@@ -7,12 +8,20 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PizzaListItemComponent implements OnInit {
 
-  @Input() pizza;
+  @Input() pizzaInit;
+  pizza;
 
-  constructor() {}
+  constructor(public pizzaService: PizzaService) {}
 
   ngOnInit() {
-    console.log(this.pizza);
+    this.pizza = this.pizzaInit;
   }
+
+  onSizeChecked = key =>
+    this.pizzaService
+      .reCalculate(this.pizzaInit, key)
+      .then(newPizza => this.pizza = newPizza);
+
+  onOrder = () => console.log('ordered');
 
 }

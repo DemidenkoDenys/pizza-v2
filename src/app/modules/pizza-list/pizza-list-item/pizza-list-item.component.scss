@@ -1,0 +1,96 @@
+.pizza-item{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 500px;
+    width: 200px;
+    border-radius: 15px;
+    margin: 1px;
+    margin-top: 50px;
+  
+    background: #fad4a7; /* Old browsers */
+    background: -moz-linear-gradient(left,  #fad4a7 0%, #fad4a7 66%, #916450 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #fad4a7 0%,#fad4a7 66%,#916450 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #fad4a7 0%,#fad4a7 66%,#916450 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fad4a7', endColorstr='#916450',GradientType=1 ); /* IE6-9 */
+
+    &-header,
+    &-footer{
+        position: relative;
+        z-index: 11;
+    }
+
+    &-header{
+        h3{
+            padding: 10px 15px;
+            text-transform: capitalize;
+        }
+    }
+   
+    &-footer{
+        position: relative;
+        top: 35px;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+        overflow: hidden;
+    }
+
+    &:hover{
+        ::ng-deep .size-checker{
+            top: 0;
+        }
+    }
+
+    &-hover-cover{
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 10;
+
+        &:hover ~ figure{
+            img{
+                width: 140%;
+                left: -40%;
+                z-index: 5;
+            }
+            figcaption{
+                bottom: -60%;
+                z-index: 6;
+            }
+        }
+    }
+
+    &-content{
+        position: absolute;
+        display: flex;
+        top: 0;
+        left: 0;
+        width: 150%;
+        height: 100%;
+        overflow: hidden;
+        
+        &-image{
+            position: absolute;
+            top: 10%;
+            width: 100%;
+            left: -50%;
+            transition: 1.5s;
+        }
+
+        &-description{
+            position: relative;
+            bottom: 0;
+            width: 53%;
+            max-height: 75%;
+            align-self: flex-end;
+            padding: 10px 20px 40px 20px;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            transition: 1s;
+        }
+    }
+}

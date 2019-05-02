@@ -1,0 +1,18 @@
+<div class="size-checker">
+  <div class="size-checker-item" *ngFor="let item of sizes | keyvalue">
+
+    <input
+      type="radio"
+      [id]="pizzaId + '_' + item.key"
+      [checked]='item.key === selected'
+    />
+
+    <label
+      [for]="pizzaId + '_' + item.key"
+      (click)='sizeChecked(item.key)'
+    >
+        {{ item.key }}
+    </label>
+
+  </div>
+</div>

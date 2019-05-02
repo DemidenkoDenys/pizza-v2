@@ -1,0 +1,65 @@
+.price-weight{
+    position: relative;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(230, 28, 38, 0.8);
+    text-align: center;
+
+    & > *{
+        color: white;
+        font-family: Arial;
+        font-size: 16px;
+    }
+
+    .price{
+        position: relative;
+        top: 15px;
+    }
+
+    .weight{
+        display: block;
+        position: absolute;
+        background: #642828;
+        height: 30px;
+        width: 60px;
+        border-radius: 0 0 30px 30px;
+        bottom: 5px;
+        left: 5px;
+        z-index:15;
+        line-height: 25px;
+        font-size: 14px;
+    }
+
+    &:hover .weight{
+        display: none;
+    }
+
+    &-order{
+        display: block;
+        position: absolute;
+        height: 30px;
+        width: 60px;
+        border: none;
+        border-radius: 0 0 30px 30px;
+        bottom: 5px;
+        left: 5px;
+        z-index:14;
+        line-height: 25px;
+        font-size: 14px;
+        text-align: center;
+        background: none;
+        outline: 0;
+
+        &:focus ~ .weight{
+            display: none;
+        }
+    }
+
+    .mat-icon{
+        width: 30px !important;
+        color: lightgreen;
+        cursor: pointer;
+        line-height: 30px;
+    }
+}

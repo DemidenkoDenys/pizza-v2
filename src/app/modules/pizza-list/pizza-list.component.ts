@@ -18,16 +18,13 @@ export class PizzaListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.initList();
+    this.initPizzaList();
   }
-
-  async initList() {
-    let snapshot = await this.firestoreService.getPizzas();
-    this.pizzas = await Promise.all(snapshot.map(async pizza => {
-      const price = await this.pizzaService.getTotalPrice(pizza);
-      const weight = await this.pizzaService.getTotalWeight(pizza);
-      return { ...pizza, price, weight };
-    }));
+  
+  async initPizzaList() {
+    let snapshot = await this.firestoreService.getPizzas(this.baseHoisting);
+    this.pizzas = await this.pizzaService.addInfo(snapshot);
   }
-
+    
+  baseHoisting = item => ('id' in item && item.id === 'base_0' ? -1 : 0);
 }
